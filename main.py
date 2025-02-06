@@ -93,3 +93,11 @@ def v_horizontal(table:list) -> str | bool:
                 return 'bolinha'
     
     return False
+
+def t_position(words) -> None:
+
+    split = list(words)
+    lette: str = split[0]
+    
+    number:int = int(split[1])
+    letter = lette.upper()
