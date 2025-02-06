@@ -1,8 +1,15 @@
+import os
+
 table: list = [
     [0,0,0], 
     [0,0,0], 
     [0,0,0] 
 ]
+
+def clear_terminal():
+
+    if os.name=='nt':
+        os.system('cls')
 
 def v_vertical_01(table:list) -> str:
     x:int = 0
@@ -121,10 +128,12 @@ def main():
         print_table(table)
         j1 = input("\nEsclha uma posição: ") 
 
+        clear_terminal()
         v_x = insert_X(table, j1)
         if v_x == False:
             print("\n !!!  Posição já escolhida !!!\n ")
             continue
+        clear_terminal()
 
         rodadas += 1
         result = all_v(table)
@@ -134,13 +143,15 @@ def main():
 
             print("\n FIM DE JOGO \n!")
             break
-
+        clear_terminal()
         print(f"\n Rodada {rodadas}/9\n")
         print("\njogador ( - O - ):")
         print_table(table)
 
         j2 = input("\n Escolha uma posição: \n\n")
+        clear_terminal()
         v_b = insert_B(table, j2)
+
 
         if v_b == False:
             print("\n !!! Posição já escolhida !!! \n")
@@ -152,7 +163,6 @@ def main():
         if result == 'O':
             print ("\n --- Bolinha Venceu ---\n")
             print_table(table)
-
             print("\n FIM DE JOGO \n!")
             break
             
@@ -161,60 +171,5 @@ def main():
 
             print("\n FIM DE JOGO \n!")
             break
-
-        if rodadas == 9:
-            print("\n\n ---- Empate!! ---- \n")
-            print("\n FIM DE JOGO \n!")
      
 main()
-
-#Proximas features 
-
-# def play_x (table, rodadas):
-
-#     print(f" Rodada {rodadas}/9")
-#     print("\nJogador ( - X - ):")
-#     print_table(table)
-#     j1 = input("\nEsclha uma posição: ") 
-
-#     v_x = insert_X(table, j1)
-
-#     if v_x == False:
-#         print("\n !!!  Posição já escolhida !!!\n ")
-#         return 5
-
-#     rodadas += 1
-#     result = all_v(table)
-
-#     if result == 'X':
-#         print ("\n --- X Venceu --- \n")
-#         print_table(table)
-#         print("\n FIM DE JOGO \n!")
-#         rodadas = 10
-#         return rodadas
-#     return rodadas
-
-
-# def play_b(table, rodadas):
-      
-#     print(f"\n Rodada {rodadas}/9\n")
-#     print("\njogador ( - O - ):")
-#     print_table(table)
-
-#     j2 = input("\n Escolha uma posição: \n\n")
-#     v_b = insert_B(table, j2)
-
-#     if v_b == False:
-#         print("\n !!! Posição já escolhida !!! \n")
-#         return 5
-
-#     print_table(table)
-#     rodadas += 1
-#     result = all_v(table)
-
-#     if result == 'O':
-#         print ("\n --- Bolinha Venceu ---\n")
-#         print_table(table)
-#         return True
-#         print("\n FIM DE JOGO \n!")
-#     return rodadas
