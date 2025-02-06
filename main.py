@@ -17,9 +17,9 @@ def v_vertical_01(table:list) -> str:
         x = 3
     
     if bolinha == 3:
-        return 'bolinha'
+        return 'B'
     elif x == 3:
-        return 'x'
+        return 'X'
     else:
         return False
 
@@ -34,9 +34,9 @@ def v_vertical_02(table:list) -> str:
         x = 3
     
     if bolinha == 3:
-        return 'bolinha'
+        return 'B'
     elif x == 3:
-        return 'x'
+        return 'X'
     else:
         return False
 
@@ -61,9 +61,9 @@ def v_lateal(table:list) -> str | bool:
                 x += 1
 
             if bolinha == 3:
-                return 'bolinha'
+                return 'B'
             elif x == 3:
-                return 'x'
+                return 'X'
     return False
         
 def v_horizontal(table:list) -> str | bool:
@@ -88,9 +88,9 @@ def v_horizontal(table:list) -> str | bool:
 
 
             if x == 3:
-                return 'x'
+                return 'X'
             elif bolinha == 3:
-                return 'bolinha'
+                return 'B'
     
     return False
 
@@ -140,8 +140,59 @@ def insert_X(table:list, words)-> bool:
 
 def print_table(table:list) -> None:
 
-    print(f"{table[0][0]} | {table[0][1]} | {table[0][2]}")
-    print("---------")
-    print(f"{table[1][0]} | {table[1][1]} | {table[1][2]}")
-    print("---------")
-    print(f"{table[2][0]} | {table[2][1]} | {table[2][2]}")
+    print("     1   2  3\n")
+    print(f"A    {table[0][0]} | {table[0][1]} | {table[0][2]}")
+    print("     ---------")
+    print(f"B    {table[1][0]} | {table[1][1]} | {table[1][2]}")
+    print("     ---------")
+    print(f"C    {table[2][0]} | {table[2][1]} | {table[2][2]}")
+
+def all_v(table):
+
+    v1 = v_vertical_01(table)
+    v2 = v_vertical_02(table)
+    v3 = v_horizontal(table)
+    v4 = v_lateal(table)
+
+    if v1 == "X" or v2 == "X" or v3 == "X" or v4 == "X":
+        return "X"
+    elif v1 == "O" or v2 == "O" or v3 == "O" or v4 == "O":
+        return "B"
+
+
+def main():
+
+    rodados:int = 0
+
+    print("\n--- Jogo da velha ---\n")
+
+    while rodados < 9:
+        
+        print("Jogador X:")
+        print_table(table)
+
+        j1 = input("\nEsclha uma posição: ") 
+
+        insert_X(table, j1)
+
+
+        print("jogador O:")
+
+        print_table(table)
+
+        j2 = input("\n Escolha uma posição: \n\n")
+
+        insert_B(table, j2)
+
+        print_table(table)
+
+        result = all_v(table)
+
+        if result == 'X':
+            print ("X Venceu")
+            break
+        elif result == 'B':
+            print("Bolinha venceu")
+            break
+
+main()
