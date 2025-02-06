@@ -146,6 +146,7 @@ def main():
             print("\n !!! Posição já escolhida !!! \n")
             continue
 
+ 
         print_table(table)
         rodadas += 1
         result = all_v(table)
