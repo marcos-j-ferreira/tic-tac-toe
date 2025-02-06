@@ -1,8 +1,8 @@
 table: list = [
 #    a  b  c
-    [1, 2, 3], # 0
-    [4, 5, 6], # 1
-    [7, 8, 9]  # 2
+    [0, 0, 0], # 0
+    [0, 0, 0], # 1
+    [0, 8, 0]  # 2
 ]
 
 
@@ -101,3 +101,39 @@ def t_position(words) -> None:
     
     number:int = int(split[1])
     letter = lette.upper()
+
+    return letter, number
+
+def insert_B(table:list, words)-> bool:
+
+    data:tuple = t_position(words)
+
+    letter:str = data[0]
+    data_int:int = data[1]
+    size:int = data_int - 1
+
+    if letter == 'A':
+        table[0][size] = 2
+        
+    elif letter == 'B':
+        table[0] [size] = 2
+    else:
+        table[0] [size] = 2
+
+def insert_X(table:list, words)-> bool:
+
+    data:tuple = t_position(words)
+
+    letter:str = data[0]
+    data_int:int = data[1]
+    size:int = data_int - 1
+
+    if letter == 'A':
+        table[0][size] = 1
+        
+    elif letter == 'B':
+        table[0] [size] = 1
+    else:
+        table[0] [size] = 1
+
+    return True
