@@ -76,21 +76,22 @@ def t_position(words) -> None:
     letter = lette.upper()
     return letter, number
 
-def insert_B(table:list, words)-> bool:
+def insert_B(table: list, words) -> bool:
     letter, number = t_position(words)
     column = ord(letter) - ord('A')
-    if table [column][number - 1] == 'X' or table[column][number - 1] == 'O':
+    if table[column][number - 1] in ['X', 'O']:
         return False
-    else:
-        table[column][number - 1] = 'O'
+    table[column][number - 1] = 'O'
+    return True
 
-def insert_X(table:list, words)-> bool:
+
+def insert_X(table: list, words) -> bool:
     letter, number = t_position(words)
     column = ord(letter) - ord('A')
-    if table[column][number - 1] == 'X' or table[column][number - 1] == 'O':
+    if table[column][number - 1] in ['X', 'O']:
         return False
-    else:
-        table[column][number - 1] = 'X'
+    table[column][number - 1] = 'X'
+    return True
 
 def print_table(table:list) -> None:
     print("     1   2  3\n")
@@ -101,22 +102,19 @@ def print_table(table:list) -> None:
     print(f"C    {table[2][0]} | {table[2][1]} | {table[2][2]}")
 
 def all_v(table):
-    v1 = v_vertical_01(table)
-    v2 = v_vertical_02(table)
-    v3 = v_horizontal(table)
-    v4 = v_lateal(table)
-    if v1 == "X" or v2 == "X" or v3 == "X" or v4 == "X":
-        return "X"
-    elif v1 == 'O' or v2 == 'O' or v3 == 'O' or v4 == 'O':
-        return "O"
-    else:
-        return False
+    if (result := v_vertical_01(table)) or (result := v_vertical_02(table)) or (result := v_horizontal(table)) or (result := v_lateal(table)):
+        return result
+    return False
     
 def main():
     rodadas:int = 0
     print("\n--- Jogo da velha ---\n")
+    x, b = 0, 0
 
     while rodadas < 10:
+
+        # play_x(table, rodadas)
+        # play_b(table, rodadas)
 
         print(f" Rodada {rodadas}/9")
         print("\nJogador ( - X - ):")
@@ -135,7 +133,6 @@ def main():
             print_table(table)
 
             print("\n FIM DE JOGO \n!")
-
             break
 
         print(f"\n Rodada {rodadas}/9\n")
@@ -163,7 +160,61 @@ def main():
             print("\n\n ---- Empate!! ---- \n")
 
             print("\n FIM DE JOGO \n!")
-
             break
 
+        if rodadas == 9:
+            print("\n\n ---- Empate!! ---- \n")
+            print("\n FIM DE JOGO \n!")
+     
 main()
+
+#Proximas features 
+
+# def play_x (table, rodadas):
+
+#     print(f" Rodada {rodadas}/9")
+#     print("\nJogador ( - X - ):")
+#     print_table(table)
+#     j1 = input("\nEsclha uma posição: ") 
+
+#     v_x = insert_X(table, j1)
+
+#     if v_x == False:
+#         print("\n !!!  Posição já escolhida !!!\n ")
+#         return 5
+
+#     rodadas += 1
+#     result = all_v(table)
+
+#     if result == 'X':
+#         print ("\n --- X Venceu --- \n")
+#         print_table(table)
+#         print("\n FIM DE JOGO \n!")
+#         rodadas = 10
+#         return rodadas
+#     return rodadas
+
+
+# def play_b(table, rodadas):
+      
+#     print(f"\n Rodada {rodadas}/9\n")
+#     print("\njogador ( - O - ):")
+#     print_table(table)
+
+#     j2 = input("\n Escolha uma posição: \n\n")
+#     v_b = insert_B(table, j2)
+
+#     if v_b == False:
+#         print("\n !!! Posição já escolhida !!! \n")
+#         return 5
+
+#     print_table(table)
+#     rodadas += 1
+#     result = all_v(table)
+
+#     if result == 'O':
+#         print ("\n --- Bolinha Venceu ---\n")
+#         print_table(table)
+#         return True
+#         print("\n FIM DE JOGO \n!")
+#     return rodadas
